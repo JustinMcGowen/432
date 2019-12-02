@@ -127,7 +127,7 @@ class Graph:
         else:
             num_edges = num_edges - num_nodes + 1
         for i in range(num_nodes-1):
-            w = dist(self.node_positions[i],self.node_positions[i])
+            w = dist(self.node_positions[i],self.node_positions[i+1])
             e.append((i,i+1,w))
             e_check.append((i,i+1))
         while num_edges!=0:
@@ -151,11 +151,14 @@ def main():
     bob = turtle.Turtle()
     bob.speed(0)
 
-    g = Graph(bob, 30, 0)
-    n,e = g.linear_graph(30,100)
+    n = 10
+    v = 40
+    g = Graph(bob, [i for i in range(n)], v)
+    g.random_nodes()
+    n,e = g.linear_graph(n,v)
+    print(e)
     g.edges = e
 
-    g.random_nodes()
     g.draw_edges('red')
     #g.draw_nodes('blue',True)
     g.draw_nodes('blue')
@@ -163,7 +166,7 @@ def main():
     e_prime = []
 
     #O(n)
-    n_prime = {i:('n','n',101) for i in n}
+    n_prime = {i:('n','n',100000) for i in n}
 
     print(n_prime)
     #O(m)
